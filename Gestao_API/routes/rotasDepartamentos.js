@@ -6,16 +6,18 @@ const {addDepartamento,
     getDepartamentoPorId,
     getDepartamentos} = require('../controllers/departamentoController')
 
-    const rotasDepartamentos = new Router();
+const {verificaJWT} = require('../controllers/segurancaController');
+
+const rotasDepartamentos = new Router();
 
 rotasDepartamentos.route('/departamentos')
-   .get(getDepartamentos)
-   .put(updateDepartamento) 
-   .post(addDepartamento);         
+   .get( getDepartamentos)
+   .put(verificaJWT, updateDepartamento) 
+   .post(verificaJWT, addDepartamento);         
 
 
 rotasDepartamentos.route('/departamentos/:id')
-   .get(getDepartamentoPorId)             
-   .delete(deleteDepartamento);    
+   .get(verificaJWT, getDepartamentoPorId)             
+   .delete(verificaJWT, deleteDepartamento);    
 
 module.exports = { rotasDepartamentos };

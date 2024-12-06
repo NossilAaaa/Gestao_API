@@ -1,16 +1,17 @@
 const { Router } = require('express');
 
 const { getFuncionarios, getFuncionarioPorId, atualizarFuncionario, deletarFuncionario, adicionarFuncionario } = require('../controllers/funcionarioController');
+const {verificaJWT} = require('../controllers/segurancaController');
 
 const rotasFuncionarios = new Router();
 
 rotasFuncionarios.route('/funcionarios')
-   .get(getFuncionarios)
-   .put(atualizarFuncionario)
-   .post(adicionarFuncionario);     
+   .get(verificaJWT, getFuncionarios)
+   .put(verificaJWT, atualizarFuncionario)
+   .post(verificaJWT, adicionarFuncionario);     
 
 rotasFuncionarios.route('/funcionarios/:id')
-   .get(getFuncionarioPorId)      
-   .delete(deletarFuncionario);    
+   .get(verificaJWT, getFuncionarioPorId)      
+   .delete(verificaJWT, deletarFuncionario);    
 
 module.exports = { rotasFuncionarios };
