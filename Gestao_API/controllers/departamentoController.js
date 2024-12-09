@@ -66,10 +66,11 @@ const getDepartamentoPorId = async (req, res) => {
 
 const getDepartamentos = async (req, res) => {
     try {
-        const departamentos = await getDepartamentosDB();  
-        return res.status(200).json({
+        const departamentos = await getDepartamentosDB(); 
+        console.log(JSON.stringify(departamentos)); 
+        return res.status(200).json(
             departamentos
-        });
+        );
     } catch (error) {
         console.error(error);
         return res.status(500).json({

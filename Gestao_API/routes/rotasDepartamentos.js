@@ -11,7 +11,7 @@ const {verificaJWT} = require('../controllers/segurancaController');
 const rotasDepartamentos = new Router();
 
 rotasDepartamentos.route('/departamentos')
-   .get( getDepartamentos)
+   .get( verificaJWT, getDepartamentos)
    .put(verificaJWT, updateDepartamento) 
    .post(verificaJWT, addDepartamento);         
 
